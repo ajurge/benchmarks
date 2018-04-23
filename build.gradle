@@ -1,0 +1,52 @@
+plugins {
+    id "me.champeau.gradle.jmh" version "0.4.5"
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    group 'com.bipinet.benchmarks'
+    version '1.0.0-SNAPSHOT'
+
+    sourceCompatibility = 1.9
+    targetCompatibility = 1.9
+
+    repositories {
+        jcenter()
+    }
+}
+
+apply plugin: 'me.champeau.gradle.jmh'
+
+dependencies {
+//  jmh 'org.openjdk.jmh:jmh-core:1.20'
+//  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.20'
+    testCompile 'junit:junit:4.12'
+}
+
+jmh {
+    humanOutputFile = null
+    warmupIterations = 10
+    iterations = 10
+    //duplicateClassesStrategy = 'warn'
+}
+
+// it is possible to tweak the jmhJar task directly
+//jmhJar.baseName = 'custom'
+
+subprojects {
+    apply plugin: 'me.champeau.gradle.jmh'
+
+    jmh {
+        humanOutputFile = null
+        warmupIterations = 10
+        iterations = 10
+        //duplicateClassesStrategy = 'warn'
+    }
+
+}
+
+
+
+
